@@ -6,6 +6,8 @@ local function validate_size(s)
 	if (size == 8 or size == 16 or size == 23 or size == 24 or size == 32)
 	  and size <= maxslots then
 		return size
+	else
+		return 16
 	end
 end
 
