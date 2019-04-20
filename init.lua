@@ -51,7 +51,7 @@ minetest.register_chatcommand("hotbar", {
 	params = "[size]",
 	description = "Sets the size of your hotbar",
 	func = function(name, slots)
-		hotbar_size = validate_size(tonumber(slots))
+		local hotbar_size = validate_size(tonumber(slots))
 		player_hotbar_settings[name] = hotbar_size
 		local player = minetest.get_player_by_name(name)
 		player:hud_set_hotbar_itemcount(hotbar_size)
