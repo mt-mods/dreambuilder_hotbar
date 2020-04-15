@@ -11,7 +11,7 @@ local function validate_size(s)
 	end
 end
 
-local hotbar_size_default = validate_size(minetest.setting_get("hotbar_size"))
+local hotbar_size_default = validate_size(minetest.settings:get("hotbar_size"))
 
 local player_hotbar_settings = {}
 
