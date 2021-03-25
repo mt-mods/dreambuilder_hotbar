@@ -1,15 +1,22 @@
 local mtver = minetest.get_version()
-local maxslots = (string.sub(mtver.string, 1, 4) ~= "0.4.") and 32 or 23
 local themename = dreambuilder_theme and dreambuilder_theme.name.."_" or ""
+
+local base_img = themename.."gui_hb_bg_1.png"
+local imgref_len = string.len(base_img) + 8 -- accounts for the stuff in the string.format() below.
+
+local hb_img = ""
+for i = 0, 31 do
+	hb_img = string.format("%s:%04i,0="..base_img, hb_img, i*64)
+end
 
 local function validate_size(s)
 	local size = s and tonumber(s) or 16
-	if (size == 8 or size == 10 or size == 16 or size == 23 or size == 24 or size == 32)
-	  and size <= maxslots then
-		return size
-	else
-		return 16
+	if size < 1 then
+		size = 1
+	elseif size > 32 then
+		size = 32
 	end
+	return size, ("[combine:"..(size*64).."x64"..string.sub(hb_img, 1, size*imgref_len))
 end
 
 local hotbar_size_default = validate_size(minetest.settings:get("hotbar_size"))
@@ -42,11 +49,11 @@ end
 load_hotbar_settings()
 
 minetest.register_on_joinplayer(function(player)
-	local hotbar_size = validate_size(get_hotbar_setting(player:get_player_name()))
+	local hotbar_size, img = validate_size(get_hotbar_setting(player:get_player_name()))
 	player:hud_set_hotbar_itemcount(hotbar_size)
 	minetest.after(0.5,function(hotbar_size)
 		player:hud_set_hotbar_selected_image(themename.."gui_hotbar_selected.png")
-		player:hud_set_hotbar_image(themename.."gui_hb_bg_"..hotbar_size..".png")
+		player:hud_set_hotbar_image(img)
 	end,hotbar_size)
 end)
 
@@ -54,12 +61,12 @@ minetest.register_chatcommand("hotbar", {
 	params = "[size]",
 	description = "Sets the size of your hotbar",
 	func = function(name, slots)
-		local hotbar_size = validate_size(tonumber(slots))
+		local hotbar_size, img = validate_size(tonumber(slots))
 		player_hotbar_settings[name] = hotbar_size
 		local player = minetest.get_player_by_name(name)
 		player:hud_set_hotbar_itemcount(hotbar_size)
 		minetest.chat_send_player(name, "[_] Hotbar size set to " ..hotbar_size.. ".")
-		player:hud_set_hotbar_image(themename.."gui_hb_bg_"..hotbar_size..".png")
+		player:hud_set_hotbar_image(img)
 		save_hotbar_settings()
 	end,
 })
