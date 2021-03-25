@@ -39,7 +39,7 @@ end)
 
 minetest.register_chatcommand("hotbar", {
 	params = "[size]",
-	description = "Sets the size of your hotbar",
+	description = "Sets the size of your hotbar, from 1 to 32 slots, default 16",
 	func = function(name, slots)
 		local size = set_hotbar_size(minetest.get_player_by_name(name), slots)
 		player_hotbar_settings[name] = size
