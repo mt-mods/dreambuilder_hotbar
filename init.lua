@@ -1,4 +1,8 @@
-local themename = dreambuilder_theme and dreambuilder_theme.name.."_" or ""
+local themename = ""
+
+if minetest.global_exists("dreambuilder_theme") then
+	themename = dreambuilder_theme.name.."_"
+end
 
 local player_hotbar_settings = {}
 local f = io.open(minetest.get_worldpath()..DIR_DELIM.."hotbar_settings","r")
@@ -32,9 +36,9 @@ local function set_hotbar_size(player, s)
 end
 
 minetest.register_on_joinplayer(function(player)
-	minetest.after(0.5,function(hotbar_size)
+	minetest.after(0.5,function()
 		set_hotbar_size(player, tonumber(player_hotbar_settings[player:get_player_name()]) or hotbar_size_default)
-	end, hotbar_size)
+	end)
 end)
 
 minetest.register_chatcommand("hotbar", {
@@ -45,7 +49,7 @@ minetest.register_chatcommand("hotbar", {
 		player_hotbar_settings[name] = size
 		minetest.chat_send_player(name, "[_] Hotbar size set to " ..size.. ".")
 
-		local f = io.open(minetest.get_worldpath()..DIR_DELIM.."hotbar_settings","w")
+		f = io.open(minetest.get_worldpath()..DIR_DELIM.."hotbar_settings","w")
 		if not f then
 			minetest.log("error","Failed to save hotbar settings")
 		else
