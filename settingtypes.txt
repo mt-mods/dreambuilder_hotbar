@@ -1,0 +1,2 @@
+# default hotbar size
+hotbar_size (Default hotbar size) int 16 1 32
