@@ -51,8 +51,7 @@ local function get_hotbar_size(player)
 			meta:set_int("hotbar_size", size)
 		end
 	end
-	if size == 0 then size = nil end
-	return size or hotbar_size_default
+	return size > 0 and size or hotbar_size_default
 end
 
 local function update_hotbar(player, hotbar_size)
