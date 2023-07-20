@@ -1,14 +1,10 @@
-
 read_globals = {
 	-- Stdlib
-	string = {fields = {"split"}},
-	table = {fields = {"copy", "getn"}},
-	"VoxelManip",
+	"string",
+	"table",
 
 	-- Minetest
 	"minetest", "DIR_DELIM",
-	"vector", "ItemStack",
-	"dump", "VoxelArea",
 
 	-- Deps
 	"dreambuilder_theme"
