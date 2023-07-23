@@ -63,9 +63,7 @@ end
 local function set_hotbar_size(player, size)
 	local meta = player:get_meta()
 	local hotbar_size = validate_size(size)
-	if hotbar_size ~= hotbar_size_default then
-		meta:set_int("hotbar_size", hotbar_size)
-	end
+	meta:set_int("hotbar_size", hotbar_size)
 	update_hotbar(player, hotbar_size)
 	return hotbar_size
 end
