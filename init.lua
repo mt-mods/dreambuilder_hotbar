@@ -68,10 +68,15 @@ local function set_hotbar_size(player, size)
 	return hotbar_size
 end
 
-minetest.register_on_joinplayer(function(player)
-	minetest.after(0.5, function()
+local function after_join(name)
+	local player = minetest.get_player_by_name(name)
+	if player then
 		update_hotbar(player, get_hotbar_size(player))
-	end)
+	end
+end
+
+minetest.register_on_joinplayer(function(player)
+	minetest.after(0.5, after_join, player:get_player_name())
 end)
 
 minetest.register_chatcommand("hotbar", {
