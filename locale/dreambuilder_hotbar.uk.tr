@@ -1,0 +1,10 @@
+# textdomain: dreambuilder_hotbar
+# Translated by FromKaniv
+
+Dreambuilder Hotbar=Хотбар Будівельника Мрій
+
+Sets the size of your hotbar, from 1 to 32 slots. Default @1=Встановлює розмір вашого хотбара, від 1 до 32 слотів. Типово: @1
+Hotbar size set to @1=Розмір хотбара встановлено на @1
+<size>=<розмір>
+
+Player is not online.=Гравець офлайн.

@@ -1,3 +1,4 @@
+local S = minetest.get_translator(core.get_current_modname())
 
 local storage = minetest.get_mod_storage()
 
@@ -67,15 +68,15 @@ minetest.register_on_joinplayer(function(player)
 end)
 
 minetest.register_chatcommand("hotbar", {
-	params = "<size>",
-	description = "Sets the size of your hotbar, from 1 to 32 slots. Default " .. hotbar_size_default,
+	params = S("<size>"),
+	description = S("Sets the size of your hotbar, from 1 to 32 slots. Default @1", hotbar_size_default),
 	func = function(name, slots)
 		local player = minetest.get_player_by_name(name)
 		if not player then
-			return false, "Player is not online."
+			return false, S("Player is not online.")
 		end
 		local size = set_hotbar_size(player, slots)
-		return true, "Hotbar size set to "..size
+		return true, S("Hotbar size set to @1", size)
 	end
 })
 

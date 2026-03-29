@@ -3,8 +3,8 @@ read_globals = {
 	"string",
 	"table",
 
-	-- Minetest
-	"minetest", "DIR_DELIM",
+	-- Luanti
+	"minetest", "core", "DIR_DELIM",
 
 	-- Deps
 	"dreambuilder_theme"

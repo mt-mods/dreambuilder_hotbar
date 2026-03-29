@@ -1,0 +1,9 @@
+# textdomain: dreambuilder_hotbar
+
+Dreambuilder Hotbar=
+
+Sets the size of your hotbar, from 1 to 32 slots. Default @1=
+Hotbar size set to @1=
+<size>=
+
+Player is not online.=
